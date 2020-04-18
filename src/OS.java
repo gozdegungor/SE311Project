@@ -19,10 +19,12 @@ public class OS {
     }
 
     public String getUsername(){
+        System.out.println("Please enter a username");
         return this.scan.next();
     }
 
     public String getPassword(){
+        System.out.println("Please enter a password");
         return this.scan.next();
     }
 
