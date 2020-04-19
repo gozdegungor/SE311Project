@@ -1,11 +1,21 @@
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import java.util.Scanner;
 
 public class OS {
     private static OS instance = null;
 
     private Scanner scan = null;
-    // TODO Create new session and assign here
-//    private Session session = null;
+    // Create new session
+    public void getSession(){
+        System.out.println("Enter a session type (GUISession or TerminalSession) :   ");
+        String choice=scan.next();
+        SessionFactory sessionFactory=new SessionFactory();
+        Session session=sessionFactory.sessionCreate(choice);
+        System.out.println(session.getSessionType()+" started with uid :  "+session.getUid());
+
+    }
+
 
     public static OS getInstance(){
         if(instance == null){
