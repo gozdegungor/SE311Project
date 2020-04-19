@@ -6,7 +6,7 @@ public class OS {
     private static OS instance = null;
 
     private Scanner scan = null;
-    // Create new session
+    // Create a new session
     public void getSession(){
         System.out.println("Enter a session type (GUISession or TerminalSession) :   ");
         String choice=scan.next();
