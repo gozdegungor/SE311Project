@@ -26,13 +26,17 @@ public class Database {
         arUsers.add(new User(2, "cem", "123", "KERBEROS"));
     }
 
-    public void print(){
-        System.out.println("iterating user database!");
+    public User checkUser(String username, String pwd, String mech) {
+        User found = null;
         AbstractIterator aI = IU.createIterator(arUsers);
-       for(aI.First(); !aI.IsDone(); aI.Next()){
+        for (aI.First(); !aI.IsDone(); aI.Next()) {
             User user = aI.CurrentItem();
-            System.out.println(user.getUid() + " " + user.getUsername() + " " + user.getPwd() + " " + user.getMech());
+            if(user.getUsername().equals(username) && user.getPwd().equals(pwd) && user.getMech().equals(mech)){
+                found = user;
+                break;
+            }
         }
-        System.out.println();
+
+        return found;
     }
 }
