@@ -1,4 +1,5 @@
 package AuthAdapter;
+
 import AuthMechanism.KERBEROS;
 
 public class KERBEROSAdapter implements AuthAdapter {
@@ -9,6 +10,6 @@ public class KERBEROSAdapter implements AuthAdapter {
     }
 
     public void authenticate(String name, String pwd) {
-         kerberos.krb_authanticate(name, pwd);
+        kerberos.krb_authanticate(name, pwd);
     }
 }

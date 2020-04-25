@@ -1,5 +1,7 @@
 package SessionFactory;
 
+import Colors.ConsoleColors;
+
 public class SessionFactory {
     //Get users session choice and creates a session
     public Session sessionCreate(String userSessionChoice) {
@@ -8,7 +10,7 @@ public class SessionFactory {
         } else if (userSessionChoice.equals("TerminalSession")) {
             return new TerminalSession();
         } else {
-            System.out.println("Invalid session type!");
+            System.out.println(ConsoleColors.PURPLE + "Invalid session type!" + ConsoleColors.RESET);
         }
         return null;
     }

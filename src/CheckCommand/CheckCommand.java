@@ -1,5 +1,6 @@
 package CheckCommand;
 
+import Colors.ConsoleColors;
 import Database.Database;
 
 public abstract class CheckCommand {
@@ -17,7 +18,7 @@ public abstract class CheckCommand {
     }
 
     public void checkingUser(String mechanism) {
-        System.out.println("Checking user for username: " + username + ", password: " + password + ", mechanism: " + mechanism);
+        System.out.println("Checking user for username: " + ConsoleColors.BLUE +  username + ConsoleColors.RESET + ", password: " + ConsoleColors.BLUE + password + ConsoleColors.RESET + ", mechanism: " + ConsoleColors.BLUE + mechanism  + ConsoleColors.RESET);
     }
 
     //primitive operation to be overridden

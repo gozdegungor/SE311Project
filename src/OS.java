@@ -1,3 +1,5 @@
+import AuthAdapter.*;
+import Colors.ConsoleColors;
 import Database.User;
 import Observer.*;
 import SessionFactory.*;
@@ -27,34 +29,30 @@ public class OS implements Observer {
         this.sessionFactory = new SessionFactory();
     }
 
-    public String getUsername(){
+    public String getUsername() {
         System.out.println("Please enter a username");
         return this.scan.next();
     }
 
-    public String getPassword(){
+    public String getPassword() {
         System.out.println("Please enter a password");
         return this.scan.next();
     }
 
-    public int authenticate(String username, String password/*, AuthAdapter adapter*/) {
+    public int authenticate(String username, String password, AuthAdapter adapter) {
         // TODO Implement
         this.username = username;
         this.password = password;
 
-        // Alwasy start from LOCAL
-//        if(adapter == null){
-//            adapter = new LOCALAdapter();
-//        }
-//        adapter.authenticate(this.username, this.password);
+        // Always default from LOCAL
+        if (adapter == null) {
+            adapter = new LOCALAdapter();
+        }
+        adapter.authenticate(this.username, this.password);
         return 0;
     }
 
     public void setuid(int uid) {
-        if(this.session == null){
-            System.out.println("SessionFactory.SessionFactory.Session does not exist");
-            return;
-        }
         this.session.setUid(uid);
     }
 
@@ -65,38 +63,40 @@ public class OS implements Observer {
         String choice = this.scan.next();
         this.session = this.sessionFactory.sessionCreate(choice);
 
-        this.setuid(this.authUser.getUid());
-
         if (this.session != null) {
-            System.out.println(this.session.getSessionType() + " started with uid :  " + this.session.getUid());
+            this.setuid(this.authUser.getUid());
+            System.out.println(ConsoleColors.GREEN_BOLD + this.session.getSessionType() + " started with uid :  " + this.session.getUid() + ConsoleColors.RESET);
         } else {
-            System.out.println("SessionFactory.SessionFactory.Session can not be created");
+            System.out.println(ConsoleColors.PURPLE + "Session can not be created" + ConsoleColors.RESET);
         }
     }
 
     @Override
     public void Update(AuthSubject authSubject) {
-        System.out.println(authSubject.getStateMessage());
         switch (authSubject.getStateMessage()) {
             case "LOCAL auth fail":
-                // TODO try LOCAL Check
-//                this.authenticate(this.username, this.password, new LOCALAdapter());
+                System.out.println(ConsoleColors.RED + authSubject.getStateMessage() + ConsoleColors.RESET);
+                // If LOCAL Fail check LDAP
+                this.authenticate(this.username, this.password, new LDAPAdapter());
                 break;
             case "LDAP auth fail":
-                // TODO try LDAP Check
-//                this.authenticate(this.username, this.password, new LDAPAdapter());
+                System.out.println(ConsoleColors.RED + authSubject.getStateMessage() + ConsoleColors.RESET);
+                // If LDAP Fail check KERBEROS
+                this.authenticate(this.username, this.password, new KERBEROSAdapter());
                 break;
             case "KERBEROS auth fail":
-                // TODO try KERBEROS Check
-//                this.authenticate(this.username, this.password, new KERBEROSAdapter());
+                System.out.println(ConsoleColors.RED + authSubject.getStateMessage() + ConsoleColors.RESET);
+                // If KERBEROS Fail user not found
+                System.out.println(ConsoleColors.RED + "USER CAN NOT BE AUTHENTICATED" + ConsoleColors.RESET);
                 break;
             case "Auth Success":
+                System.out.println(ConsoleColors.GREEN_BOLD + authSubject.getStateMessage() + ConsoleColors.RESET);
                 // Auth done create session of choice now
                 this.authUser = authSubject.getStateUser();
                 this.createSession();
                 break;
             default:
-                System.out.println("Unknown state message");
+                System.out.println(ConsoleColors.PURPLE + "Unknown state message" + ConsoleColors.RESET);
         }
     }
 }

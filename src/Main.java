@@ -6,8 +6,8 @@ public class Main {
         AuthSubject authSubject = AuthSubject.getInstance();
         authSubject.Attach(os);
 
-//        String username = os.getUsername();
-//        String password = os.getPassword();
-//        os.authenticate(username, password);
+        String username = os.getUsername();
+        String password = os.getPassword();
+        os.authenticate(username, password, null);
     }
 }

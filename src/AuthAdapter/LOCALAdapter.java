@@ -1,4 +1,5 @@
 package AuthAdapter;
+
 import AuthMechanism.LOCAL;
 
 public class LOCALAdapter implements AuthAdapter {
