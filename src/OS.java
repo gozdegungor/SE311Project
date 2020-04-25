@@ -46,7 +46,7 @@ public class OS implements Observer {
 //        if(adapter == null){
 //            adapter = new LOCALAdapter();
 //        }
-//        adapter.authanticate(this.username, this.password);
+//        adapter.authenticate(this.username, this.password);
         return 0;
     }
 
@@ -79,11 +79,11 @@ public class OS implements Observer {
         System.out.println(authSubject.getStateMessage());
         switch (authSubject.getStateMessage()) {
             case "LOCAL auth fail":
-                // TODO try LDAP Check
+                // TODO try LOCAL Check
 //                this.authenticate(this.username, this.password, new LOCALAdapter());
                 break;
             case "LDAP auth fail":
-                // TODO try KERBEROS Check
+                // TODO try LDAP Check
 //                this.authenticate(this.username, this.password, new LDAPAdapter());
                 break;
             case "KERBEROS auth fail":
