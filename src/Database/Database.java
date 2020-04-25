@@ -1,11 +1,15 @@
 package Database;
 
+import Iterator.*;
+import Observer.AuthSubject;
+
 import java.util.ArrayList;
 
 public class Database {
     private static Database instance = null;
     private IteratorUser IU = new IteratorUser();
-    private ArrayList<User> arUsers;
+    private final ArrayList<User> arUsers;
+    private final AuthSubject authSubject;
 
     public static Database getInstance() {
         if (instance == null) {
@@ -16,7 +20,7 @@ public class Database {
 
     private Database() {
         this.arUsers = new ArrayList<>();
-
+        this.authSubject = AuthSubject.getInstance();
         generateDummyData();
     }
 
@@ -27,16 +31,19 @@ public class Database {
     }
 
     public User checkUser(String username, String pwd, String mech) {
-        User found = null;
+        User foundUser = null;
         AbstractIterator aI = IU.createIterator(arUsers);
         for (aI.First(); !aI.IsDone(); aI.Next()) {
             User user = aI.CurrentItem();
-            if(user.getUsername().equals(username) && user.getPwd().equals(pwd) && user.getMech().equals(mech)){
-                found = user;
+            if (user.getUsername().equals(username) && user.getPwd().equals(pwd) && user.getMech().equals(mech)) {
+                foundUser = user;
                 break;
             }
         }
 
-        return found;
+        String stateMessage = (foundUser == null) ? mech + " auth fail" : "Auth Success";
+        this.authSubject.setStates(stateMessage, foundUser);
+
+        return foundUser;
     }
 }

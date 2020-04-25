@@ -1,11 +1,11 @@
 package AuthMechanism;
 
-public abstract class AuthMechanism {
-    // TODO remove comment after master command implemented
-    // protected MasterCheckCommand command;
+import CheckCommand.CheckCommand;
 
-    protected void doCheck(){
-        // TODO remove comment after commands implemented
-        // this.command.Execute();
-    };
+public abstract class AuthMechanism {
+    protected CheckCommand command;
+
+    protected void doCheck() {
+        this.command.Execute();
+    }
 }

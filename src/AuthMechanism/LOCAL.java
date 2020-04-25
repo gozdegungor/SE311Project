@@ -1,5 +1,7 @@
 package AuthMechanism;
 
+import CheckCommand.LocalCheckCommand;
+
 public class LOCAL extends AuthMechanism {
     private static LOCAL instance = null;
 
@@ -13,10 +15,8 @@ public class LOCAL extends AuthMechanism {
     private LOCAL() {
     }
 
-    public void local_authanticate(String username, String pwd) {
-        // TODO Create new LocalCheckCommand and assign it to command variable
-        // this.command = new LocalCheckCommand(String username, String pwd);
-
+    public void local_authanticate(String username, String password) {
+        this.command = new LocalCheckCommand(username, password);
         doCheck();
     }
 }

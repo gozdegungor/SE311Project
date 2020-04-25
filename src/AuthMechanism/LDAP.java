@@ -1,5 +1,7 @@
 package AuthMechanism;
 
+import CheckCommand.LDAPCheckCommand;
+
 public class LDAP extends AuthMechanism {
     private static LDAP instance = null;
 
@@ -13,10 +15,8 @@ public class LDAP extends AuthMechanism {
     private LDAP() {
     }
 
-    public void ldap_authanticate(String username, String pwd) {
-        // TODO Create new LDAPCheckCommand and assign it to command variable
-        // this.command = new LDAPCheckCommand(String username, String pwd);
-
+    public void ldap_authanticate(String username, String password) {
+        this.command = new LDAPCheckCommand(username, password);
         doCheck();
     }
 }

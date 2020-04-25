@@ -1,5 +1,7 @@
 package AuthMechanism;
 
+import CheckCommand.KerberosCheckCommand;
+
 public class KERBEROS extends AuthMechanism {
     private static KERBEROS instance = null;
 
@@ -13,10 +15,8 @@ public class KERBEROS extends AuthMechanism {
     private KERBEROS() {
     }
 
-    public void krb_authanticate(String username, String pwd) {
-        // TODO Create new KERBEROSCheckCommand and assign it to command variable
-        // this.command = new KERBEROSCheckCommand(String username, String pwd);
-
+    public void krb_authanticate(String username, String password) {
+         this.command = new KerberosCheckCommand(username,password);
         doCheck();
     }
 }
