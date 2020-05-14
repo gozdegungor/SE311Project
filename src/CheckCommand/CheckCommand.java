@@ -26,5 +26,5 @@ public abstract class CheckCommand {
 
     private String username;
     private String password;
-    protected Database db;
+    private Database db;
 }
