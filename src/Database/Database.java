@@ -23,7 +23,7 @@ public class Database {
         generateDummyData();
     }
 
-    public void generateDummyData() {
+    private void generateDummyData() {
         arUsers.add(new User(0, "gozde", "123", "LOCAL"));
         arUsers.add(new User(1, "yigit", "123", "LDAP"));
         arUsers.add(new User(2, "cem", "123", "KERBEROS"));
