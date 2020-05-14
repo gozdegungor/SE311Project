@@ -24,7 +24,7 @@ public abstract class CheckCommand {
     //primitive operation to be overridden
     protected abstract String getMechanism();
 
-    protected String username;
-    protected String password;
+    private String username;
+    private String password;
     protected Database db;
 }
