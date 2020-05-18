@@ -40,7 +40,6 @@ public class OS implements Observer {
     }
 
     public void authenticate(String username, String password, AuthAdapter adapter) {
-        // TODO Implement
         this.username = username;
         this.password = password;
 
