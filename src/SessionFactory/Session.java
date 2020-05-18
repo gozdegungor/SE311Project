@@ -8,7 +8,9 @@ public abstract class Session {
         return Uid;
     }
 
-    abstract public void setUid(int Uid);
+    public void setUid(int Uid) {
+        this.Uid = Uid;
+    }
 
     abstract public String getSessionType();
 }
