@@ -1,9 +1,11 @@
 import Observer.AuthSubject;
 
 public class Main {
+    private static OS os;
+    private static AuthSubject authSubject;
     public static void main(String[] args) {
-        OS os = OS.getInstance();
-        AuthSubject authSubject = AuthSubject.getInstance();
+        os = OS.getInstance();
+        authSubject = AuthSubject.getInstance();
         authSubject.Attach(os);
 
         String username = os.getUsername();

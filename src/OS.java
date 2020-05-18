@@ -39,7 +39,7 @@ public class OS implements Observer {
         return this.scan.next();
     }
 
-    public int authenticate(String username, String password, AuthAdapter adapter) {
+    public void authenticate(String username, String password, AuthAdapter adapter) {
         // TODO Implement
         this.username = username;
         this.password = password;
@@ -49,7 +49,6 @@ public class OS implements Observer {
             adapter = new LOCALAdapter();
         }
         adapter.authenticate(this.username, this.password);
-        return 0;
     }
 
     public void setuid(int uid) {
