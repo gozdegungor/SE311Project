@@ -1,3 +1,8 @@
+// Yiğit Ege Miman - 20160602022
+// Gözde Güngör - 20160601023
+// Cem Özcan - 20170601024
+// A Pluggable Authentication Mechanism
+
 package Database;
 
 import Iterator.*;
@@ -29,7 +34,7 @@ public class Database {
         arUsers.add(new User(2, "cem", "123", "KERBEROS"));
     }
 
-    public User checkUser(String username, String pwd, String mech) {
+    public void checkUser(String username, String pwd, String mech) {
         User foundUser = null;
         AbstractIterator aI = new UserIterator(arUsers);
         for (aI.First(); !aI.IsDone(); aI.Next()) {
@@ -42,7 +47,5 @@ public class Database {
 
         String stateMessage = (foundUser == null) ? mech + " auth fail" : "Auth Success";
         this.authSubject.setStates(stateMessage, foundUser);
-
-        return foundUser;
     }
 }
